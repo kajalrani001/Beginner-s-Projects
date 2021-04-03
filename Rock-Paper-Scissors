@@ -1,0 +1,70 @@
+from tkinter import *
+import random
+
+root = Tk()
+root.geometry('400x400')
+root.resizable(0, 0)
+root.title('Project- Rock, Paper, Scissiors')
+root.config(bg='seashell3')
+
+Label(root, text='Rock, Paper, Scissors', font='arial 20 bold', bg='seashell2').pack()
+
+user_take = StringVar()
+Label(root, text='Chose any one : rock, paper, scissors', font='arial 15 bold', bg='seashell2').place(x=20, y=70)
+Entry(root, font='arial 15', textvariable=user_take, bg='antiquewhite2').place(x=90, y=130)
+
+
+def comp_input():
+    comp_pick = random.randint(1, 3)
+    if comp_pick == 1:
+        comp_pick = 'rock'
+    elif comp_pick == 2:
+        comp_pick = 'paper'
+    else:
+        comp_pick = 'scissors'
+    return comp_pick
+
+
+Result = StringVar()
+
+print('Function Started')
+
+
+def play():
+    user_pick = user_take.get()
+
+    comp_pick = comp_input()
+    if user_pick == comp_pick:
+        Result.set('tie, You both selected same')
+    elif user_pick == 'rock' and comp_pick == 'paper':
+        Result.set('You Loose, Computer selected Paper')
+    elif user_pick == 'rock' and comp_pick == 'scissors':
+        Result.set('You Win, Computer selected Scissors')
+    elif user_pick == 'paper' and comp_pick == 'rock':
+        Result.set('You Win, Computer selected Rock')
+    elif user_pick == 'paper' and comp_pick == 'scissors':
+        Result.set('You Loose, Computer selected Scissors')
+    elif user_pick == 'scissors' and comp_pick == 'paper':
+        Result.set('You Win, Computer selected Paper')
+    elif user_pick == 'scissors' and comp_pick == 'rock':
+        Result.set('You Loose, Computer selected Rock')
+    else:
+        Result.set('Invalid Input , Choose any one -- rock, paper, scissors')
+
+
+def reset():
+    Result.set('')
+    user_take.set('')
+
+
+def exit():
+    root.destroy()
+
+
+Entry(root, font='arial 10 bold', textvariable=Result, bg='antiquewhite2', width=50).place(x=25, y=250)
+Button(root, font='arial 13 bold', padx=5, text='PLAY', bg='seashell4', command=play).place(x=150, y=190)
+Button(root, font='arial 13 bold', padx=5, text='RESET', bg='seashell4', command=reset).place(x=70, y=310)
+Button(root, font='arial 13 bold', padx=5, text='EXIT', bg='seashell4', command=exit).place(x=230, y=310)
+
+
+root.mainloop()
